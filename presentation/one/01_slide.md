@@ -188,3 +188,4 @@
 
 * state_machine gem [https://github.com/pluginaweek/state_machine](https://github.com/pluginaweek/state_machine)
 * declarative_authorization gem [https://github.com/stffn/declarative_authorization](https://github.com/stffn/declarative_authorization)
+* simple_form gem [https://github.com/plataformatec/simple_form](https://github.com/plataformatec/simple_form)
