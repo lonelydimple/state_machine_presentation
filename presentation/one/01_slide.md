@@ -1,45 +1,65 @@
-!SLIDE subsection
+!SLIDE 
 # State Machine
 
 ## https://github.com/pluginaweek/state_machine
 
-!SLIDE subsection bullets incremental
-# Why use state_machine?
+!SLIDE 
+# Why did we use state_machine? #
 
-* provides a CHEAP "mini-DSL" for your domain logic
-* replace messy/inconsistent boolean methods throughout the class
-* enforces consistency across the application in dealing with state
+!SLIDE center
 
-!SLIDE subsection
+# Maybe? #
+
+![definition](finite_state_machine.jpg)
+
+!SLIDE 
+
+# Real Reasons #
+
+* Provides a CHEAP "mini-DSL" for your domain logic
+* Replace messy/inconsistent boolean methods throughout the class
+* Provided everything we needed in a small footprint
+* Enforces consistency across the many objects implementing state logic
+
+!SLIDE 
 # An example application
 
 ## Students!
 
-!SLIDE subsection center
-# state_machine at Merchants
+!SLIDE center
+# state_machine at Merchants Bonding
 
 ![bond](plumber_bond.jpg)
 
-!SLIDE subsection bullets incremental
+!SLIDE 
 
 # Updating/Endorsing surety bonds
 
-* legal documents that express an obligation over time
-* changes need to be made to the obligation (needing to endorse the
+* Legal documents that express an obligation over time
+* Changes need to be made to the obligation (needing to endorse the
   legal document)
-* lots of different "categories" of changes
-* web users request these changes
-* merchants approves these changes
+* Lots of different "categories" of changes
+* Web users request changes
+* Merchants' employee approves changes
 
-!SLIDE bullets subsection incremental
+!SLIDE 
 
 # Common workflow for all updates
 
-* User submits request to update surety bond => Employee approves/declines
-update request => User executes update and gets endorsement
-documentation
+* User submits request to update surety bond => 
+* Employee approves/declines update request => 
+* User executes update and gets endorsement documentation (records
+  updated, optionally billing created)
 
-!SLIDE smaller subsection
+!SLIDE 
+# Events 
+
+* Submit/Remove for Review
+* Approve/Decline for Execution
+* Execute
+* Cancel
+
+!SLIDE smaller
 # Defining a state machine for a generic update
 
     @@@ ruby
@@ -51,7 +71,9 @@ documentation
           transition [:draft, 
                       :editing_renewal] => :pending_review
         end
+
         ....
+
         event :execute do
           transition [:draft, 
                       :pending_review, 
@@ -61,7 +83,7 @@ documentation
       end
     end
 
-!SLIDE smaller subsection
+!SLIDE smaller 
 
 # Specifying validations for a particular type of update
 
@@ -69,7 +91,7 @@ documentation
     class NameUpdate < Update
 
       validates :name, :presence => true
-      validates :receiver, :presence => true
+      validates :surety_bond, :presence => true
       validate :name_attributes_must_be_changed, :if => :draft?
 
       ....
@@ -82,7 +104,7 @@ documentation
 
     end
 
-!SLIDE smaller subsection
+!SLIDE smaller 
 
 # Specifying callbacks for update type
 
@@ -108,7 +130,7 @@ documentation
 
     end
 
-!SLIDE smaller subsection
+!SLIDE smaller 
 # Mapping the events to controller actions
 
     @@@ ruby
@@ -132,7 +154,7 @@ documentation
 
     end
 
-!SLIDE smaller subsection
+!SLIDE smaller 
 # Using declarative_authorization gem to control access to events
 
     @@@ ruby
@@ -154,3 +176,15 @@ documentation
         end
       end
     end
+
+!SLIDE 
+# No More
+
+* Questions
+* Discussion
+
+!SLIDE 
+# Resources
+
+* state_machine gem [https://github.com/pluginaweek/state_machine](https://github.com/pluginaweek/state_machine)
+* declarative_authorization gem [https://github.com/stffn/declarative_authorization](https://github.com/stffn/declarative_authorization)
