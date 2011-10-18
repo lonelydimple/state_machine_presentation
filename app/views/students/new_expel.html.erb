@@ -1,0 +1,8 @@
+<h1>Suspend Student</h1>
+
+<%= simple_form_for(@student, :url => expel_student_path(@student)) do |f| %>
+
+  <%= f.input :expellation_reason %>
+  <%= f.submit %>
+
+<% end %>

@@ -6,7 +6,7 @@ class Student < ActiveRecord::Base
   state_machine :state, :initial => 'recruited' do
 
     event :register do
-      transition [:recruited] => :registered
+      transition [:recruited, :withdrawn] => :registered
     end
 
     state :enrolled do
@@ -25,8 +25,20 @@ class Student < ActiveRecord::Base
       transition :enrolled => :suspended
     end
 
+    state :expel do
+      validates :expellation_reason, :presence => true
+    end
+
+    event :expel do
+      transition :suspended => :expelled
+    end
+
     event :graduate do
       transition :enrolled => :graduated, :unless => :low_gpa?
+    end
+
+    event :withdraw do
+      transition any - :graduated => :withdrawn
     end
 
     before_transition :on => :register, :do => :set_registration_date

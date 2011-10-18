@@ -24,8 +24,9 @@
       <%= link_to 'Destroy', student, :confirm => 'Are you sure?', :method => :delete %> |
       <br/>
       <%= link_to_if student.can_register?, "Register", register_student_path(student), :method => :put %> |
-      <%= link_to_if student.can_suspend?, 'Suspend', new_suspend_student_path(student) %> |
       <%= link_to_if student.can_enroll?, 'Enroll', enroll_student_path(student), :method => :put %> |
+      <%= link_to_if student.can_suspend?, 'Suspend', new_suspend_student_path(student) %> |
+      <%= link_to_if student.can_expel?, 'Expel', new_expel_student_path(student) %> |
       <%= link_to_if student.can_graduate?, 'Graduate', graduate_student_path(student), :method => :put %>
     </td>
   </tr>

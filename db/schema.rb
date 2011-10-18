@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018151246) do
+ActiveRecord::Schema.define(:version => 20111018173747) do
 
   create_table "alumnus", :force => true do |t|
     t.string   "first_name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20111018151246) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.text     "expellation_reason"
   end
 
 end

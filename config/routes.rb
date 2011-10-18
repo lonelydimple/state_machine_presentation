@@ -3,6 +3,8 @@ StateMachine::Application.routes.draw do
     member do
       get :new_suspend
       put :suspend
+      get :new_expel
+      put :expel
       put :enroll
       put :register
       put :graduate

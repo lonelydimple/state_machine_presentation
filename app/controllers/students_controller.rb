@@ -95,6 +95,20 @@ class StudentsController < ApplicationController
     end
   end
 
+  def new_expel
+    @student = Student.find(params[:id])
+  end
+
+  def expel
+    @student = Student.find(params[:id])
+    @student.update_attributes(params[:student])
+    if @student.expel
+      redirect_to(students_path, :notice => "Student expelled")
+    else
+      render :action => :new_expel
+    end
+  end
+
   def enroll
     Student.find(params[:id]).enroll
     redirect_to(students_path, :notice => "Student enrolled")

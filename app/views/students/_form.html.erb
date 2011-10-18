@@ -14,10 +14,6 @@
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :gpa %>
-  <% if @student.can_suspend? %>
-    <%= f.input :suspension_reason %>
-  <% end %>
-
   <div class="actions">
     <%= f.submit %>
   </div>
