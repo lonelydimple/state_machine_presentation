@@ -1,4 +1,14 @@
 StateMachine::Application.routes.draw do
+  resources :students do
+    member do
+      get :new_suspend
+      put :suspend
+      put :enroll
+      put :register
+      put :graduate
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
