@@ -55,7 +55,7 @@ class Student < ActiveRecord::Base
   end
 
   def low_gpa?
-    errors[:base] << "GPA must be at least 2.0 to graduate" if self[:gpa] < 2
+    self[:gpa] < 2
   end
 
 end
